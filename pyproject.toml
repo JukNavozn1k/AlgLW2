@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "alglw2"
+version = "1.0.0"
+description = ""
+authors = ["JukNavozn1k <86569510+JukNavozn1k@users.noreply.github.com>"]
+license = "M.I.T"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+networkx = "^3.2.1"
+matplotlib = "^3.8.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
