@@ -2,10 +2,10 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 def has_cycle(graph):
-    visited = set()
-    rec_stack = set()
+    visited = set() # множество всех вершин, в которых мы были
+    rec_stack = set() # множество вершин, в которых мы были при пробеге, при обходе от вершины x
     def dfs(node):
-        if node in rec_stack:
+        if node in rec_stack: 
             return True
 
         if node in visited:
@@ -24,7 +24,6 @@ def has_cycle(graph):
     for node in graph.nodes():
         if dfs(node):
             return True
-
     return False
 
 G = nx.DiGraph()
@@ -36,7 +35,7 @@ else:
     title = "Циклов нет"
 
 
-# Print
+# Визуализация
 plt.title(title, fontsize=16, color='blue')
 pos = nx.spring_layout(G)
 
