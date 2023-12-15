@@ -1,6 +1,10 @@
 from collections import deque
+import networkx as nx
+import matplotlib.pyplot as plt
 
-# Function to perform Breadth First Search (BFS)
+
+
+# Стандартный поиск в ширину
 def bfs(graph, start):
     visited = {node: False for node in graph}
     distances = {node: float('inf') for node in graph}
@@ -20,30 +24,39 @@ def bfs(graph, start):
 
     return distances
 
-# Function to find the diameter of the graph
+
+# Находит максимальное расстояние от вершины A до соседей
+# Повторяет предыдущий шаг для оставшихся вершин и возвращает максимальное значение.
 def graph_diameter(graph):
     max_diameter = 0
 
     for node in graph:
         distances = bfs(graph, node)
         max_distance = max(distances.values())
-        if max_distance > max_diameter:
-            max_diameter = max_distance
-
+        max_diameter = max(max_diameter,max_distance)
     return max_diameter
 
-# Define your graph (adjacency list representation)
-# Replace this with your own graph structure
+
+
+# Тестовый граф
 graph = {
     1: [2, 3],
-    2: [1, 4],
-    3: [1, 5],
-    4: [2, 5],
-    5: [3, 4],
+    2: [1, 3],
+    3: [1,2],
     
 }
-
-# Calculate the diameter of the graph
 diameter = graph_diameter(graph)
 
-print(f"The diameter of the graph is: {diameter}")
+
+# Визуализация графа
+G = nx.Graph()
+for node, neighbors in graph.items():
+    for neighbor in neighbors:
+        G.add_edge(node, neighbor)
+
+plt.figure(figsize=(8, 6))
+plt.title(f"Диаметр графа: {diameter}", fontsize=16, color='blue')
+pos = nx.spring_layout(G)  
+nx.draw(G, pos, with_labels=True, node_size=500, node_color='skyblue', font_weight='bold', font_size=12)
+
+plt.show()
